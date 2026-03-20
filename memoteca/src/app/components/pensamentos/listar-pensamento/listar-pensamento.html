@@ -4,30 +4,36 @@
         <button routerLink="/criarPensamento" class="botao">Adicionar pensamento</button>
     </header>
 
-    <!-- Modo Antigo
-    <div class="mural" *ngIf="listaPensamentos.length > 0, else semPensamentos">
+    <!-- Modo Antigo -->
+    <!-- <div class="mural" *ngIf="!carregando && listaPensamentos.length > 0; else semPensamentos">
         <div *ngFor="let pensamento of listaPensamentos">
             <app-pensamento [pensamento]="pensamento"></app-pensamento>
         </div>
     </div> -->
 
     <!-- Modo Novo -->
-    @if (listaPensamentos.length > 0) {
-        <div class="mural">
-            @for (pensamento of listaPensamentos; track $index) {
-                <app-pensamento [pensamento]="pensamento"></app-pensamento>
-            }
-        </div>
+    @if (!carregando) {
+        @if (listaPensamentos.length > 0) {
+            <div class="mural">
+                @for (pensamento of listaPensamentos; track pensamento.id) {
+                    <app-pensamento [pensamento]="pensamento"></app-pensamento>
+                }
+            </div>
+        } @else {
+            <div class="ff-inter sem-pensamentos">
+                <p>Ainda não há pensamentos cadastrados!</p>
+            </div>
+        }
     } @else {
-        <div class="ff-inter sem-pensamentos">
-            <p>Ainda não há pensamentos cadastrados!</p>
+        <div class="ff-inter">
+            <p>Carregando pensamentos...</p>
         </div>
     }
     
 </section>
 
-<!-- Modo Antigo
-<ng-template #semPensamentos>
+<!-- Modo Antigo -->
+<!-- <ng-template #semPensamentos>
     <div class="ff-inter sem-pensamentos">
         <p>Ainda não há pensamentos cadastrados!</p>
     </div>

@@ -1,18 +1,21 @@
+import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { PensamentoInterface } from './pensamentoInterface';
 
 @Component({
   selector: 'app-pensamento',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './pensamento.html',
   styleUrl: './pensamento.css',
 })
 export class Pensamento {
 
-  @Input() pensamento = {
-    conteudo: 'I love Angular',
-    autoria: 'Nay',
-    modelo: 'modelo3'
+  @Input() pensamento: PensamentoInterface = {
+    id: '',
+    conteudo: '',
+    autoria: '',
+    modelo: ''
   }
 
   larguraPensamento(): string {
